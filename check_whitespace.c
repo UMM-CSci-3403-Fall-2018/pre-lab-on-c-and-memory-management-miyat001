@@ -45,6 +45,9 @@ char* strip(char* str) {
   }
   // Place the null terminator at the end of the result string.
   result[i-first_non_space] = '\0';
+  
+  free(result);
+  //I free here, but it does not makes sence. Run successfully and free the memory. However, it does not hand anything to next code. I guess the is_clean part is where free() should be.
 
   return result;
 }
@@ -64,11 +67,17 @@ int is_clean(char* str) {
   // strcmp compares two strings, returning a negative value if
   // the first is less than the second (in alphabetical order),
   // 0 if they're equal, and a positive value if the first is
-  // greater than the second.
+  // greater than the second.  
+  
   result = strcmp(str, cleaned);
 
+  //free(cleaned);
+  //I tried to free here, but it breaks the progrram.
+
   return result == 0;
+  
 }
+
 
 int main() {
   int i;
@@ -90,6 +99,7 @@ int main() {
       printf("The string '%s' is NOT clean.\n", strings[i]);
     }
   }
-
+ 
   return 0;
+
 }
