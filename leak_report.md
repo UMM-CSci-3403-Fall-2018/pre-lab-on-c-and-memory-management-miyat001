@@ -8,9 +8,11 @@
 ==19831==    by 0x400773: is_clean (check_whitespace.c:62)
 ==19831==    by 0x40080A: main (check_whitespace.c:87)
 
-46 bytes are lost. It is allocated by calloc. The leaked codes are 41, 62, 87.
-The memory leak happen because of calloc. The calloc keeps(allocate) the memory for string. I need to release the memory at some pint.
-The best point to release the memory is last function that get the value from calloc. In this case, "is_clean" is the last function. However,when I write "free()" in "is_clean", I get error from program. Therefore, I write "free()" in char*strip function.
+46 bytes are lost. It is allocated by calloc. The predictable leaked codes are 41, 62, 87.
+The memory leak happen because the calloc keeps(allocate) the memory for string.
+I need to release the memory on the last function that is handed the value from calloc. 
+In this case, "is_clean" is the last function. However,when I write "free()" in "is_clean", I get error from program.
+Therefore, I write "free()" in char*strip function.
 
 I added free(result) to code.
 
